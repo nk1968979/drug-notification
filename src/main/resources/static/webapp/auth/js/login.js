@@ -5,7 +5,7 @@ function login(event,role){
                             "password":document.loginForm.pass.value,
                              "role":role
                           }
-            var login = $.ajax({
+             $.ajax({
                           type: 'POST',
                           url: "/login",
                           data: JSON.stringify(loginData),
@@ -13,7 +13,9 @@ function login(event,role){
                           success: function(resultData) {
                             window.localStorage.setItem("token","Bearer "+resultData.token);
                             window.location.href="/home?token="+window.localStorage.getItem("token");
-                           }
+                           },
+                          error:function(error){
+                            alert(error.responseJSON.message);
+                          }
                     });
-            login.error(function(result) {  alert(result)});
 }

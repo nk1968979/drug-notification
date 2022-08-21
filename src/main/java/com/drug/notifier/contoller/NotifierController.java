@@ -11,12 +11,10 @@ import org.springframework.web.servlet.ModelAndView;
 public class NotifierController {
     @GetMapping(value = "/signin", produces = MediaType.APPLICATION_JSON_VALUE)
     public ModelAndView getLoginPage() {
-        System.out.println("I am Sign Page");
        return new ModelAndView("webapp/auth/landing/index.html");
     }
     @GetMapping(value = "/home", produces = MediaType.APPLICATION_JSON_VALUE)
     public ModelAndView getHomePage(@AuthenticationPrincipal User user) {
-        System.out.println("I am Home Page");
         return new ModelAndView("index.html");
     }
 }
