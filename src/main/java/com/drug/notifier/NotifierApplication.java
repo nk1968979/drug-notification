@@ -7,13 +7,13 @@ import org.springframework.web.client.RestTemplate;
 
 @SpringBootApplication
 public class NotifierApplication {
-
-	public static void main(String[] args) {
-		SpringApplication.run(NotifierApplication.class, args);
-	}
 	@Bean
 	public RestTemplate getRestTemplate() {
 		return new RestTemplate();
 	}
+	public static void main(String[] args) {
+		SpringApplication.run(NotifierApplication.class, args);
+	}
+
 
 }

@@ -24,6 +24,6 @@ public class ControllerAdvisor extends ResponseEntityExceptionHandler {
     }
     @Override
     protected ResponseEntity<Object> handleMissingServletRequestParameter(MissingServletRequestParameterException ex, HttpHeaders headers, HttpStatus status, WebRequest request) {
-        return null;
+        return handleOtherException(ex);
     }
 }
