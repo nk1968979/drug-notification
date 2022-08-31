@@ -3,8 +3,8 @@ package com.drug.notifier.model;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "user")
-public class UserEntity {
+@Table(name = "physician")
+public class Physician {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

@@ -1,10 +1,28 @@
 <html>
-<head>
-    <script>
-        window.history.pushState({}, null, "/home");
-    </script>
-</head>
-<body>
-<h1>Welcome to Drug Notifier Portal</h1>
-</body>
+    <head>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        <script>
+            var token=window.localStorage.getItem("token");
+            if(token!=null){
+                    $.ajax({
+                               type: 'GET',
+                               url: "/getRole?token="+token,
+                               contentType: "application/json",
+                               success: function(resultData) {
+                                    if(resultData.length>0 && resultData[0].authority){
+                                         window.location.href="/webapp/dashboard/"+resultData[0].authority+"/home.html";
+                                    }else{
+                                        window.location.href="/signin";
+                                    }
+                               },
+                               error:function(error){
+                                    alert(error.responseJSON.message);
+                               }
+                    });
+            }else{
+                window.location.href="/signin";
+            }
+
+        </script>
+    </head>
 </html>

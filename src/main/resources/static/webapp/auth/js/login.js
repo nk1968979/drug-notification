@@ -12,7 +12,7 @@ function login(event,role){
                           contentType: "application/json",
                           success: function(resultData) {
                             window.localStorage.setItem("token","Bearer "+resultData.token);
-                            window.location.href="/home?token="+window.localStorage.getItem("token");
+                            window.location.href="/webapp/dashboard/"+role+"/home.html";
                            },
                           error:function(error){
                             alert(error.responseJSON.message);

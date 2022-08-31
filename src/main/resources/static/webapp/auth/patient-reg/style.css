@@ -44,7 +44,7 @@ body{
   height: 52px;
   margin: 18px 0;
 }
-form .input-box input{
+form .input-box input,form .input-box select{
   height: 100%;
   width: 100%;
   outline: none;
@@ -57,8 +57,8 @@ form .input-box input{
   border-radius: 6px;
   transition: all 0.3s ease;
 }
-.input-box input:focus,
-.input-box input:valid{
+.input-box input:focus,.input-box select:focus,
+.input-box input:valid,.input-box select:valid{
   border-color: #4070f4;
 }
 form .policy{
@@ -71,14 +71,14 @@ form h3{
   font-weight: 500;
   margin-left: 10px;
 }
-.input-box.button input{
+.input-box.button input,.input-box.button select{
   color: #fff;
   letter-spacing: 1px;
   border: none;
   background: #4070f4;
   cursor: pointer;
 }
-.input-box.button input:hover{
+.input-box.button input:hover,.input-box.button select:hover{
   background: #0e4bf1;
 }
 form .text h3{
@@ -93,3 +93,4 @@ form .text h3 a{
 form .text h3 a:hover{
   text-decoration: underline;
 }
+select:invalid { color: gray!important; }
