@@ -9,8 +9,12 @@
                                url: "/getRole?token="+token,
                                contentType: "application/json",
                                success: function(resultData) {
-                                    if(resultData.length>0 && resultData[0].authority){
-                                         window.location.href="/webapp/dashboard/"+resultData[0].authority+"/home.html";
+                                    if(resultData.role){
+                                        var redirectURL="/webapp/dashboard/"+resultData.role+"/home.html";
+                                        if(resultData.role==="patient"){
+                                            redirectURL=redirectURL+"?id="+resultData.id;
+                                        }
+                                        window.location.href=redirectURL;
                                     }else{
                                         window.location.href="/signin";
                                     }

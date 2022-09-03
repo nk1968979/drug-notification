@@ -1,7 +1,116 @@
 <html>
 <head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css"
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/js/bootstrap.min.js"
+            integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+            crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="/webapp/dashboard/physician/style.css" />
+    <script src="/webapp/dashboard/patient/data.js"></script>
+    <script src="/webapp/auth/js/logout.js"></script>
 </head>
+
 <body>
-<h1>Welcome to Drug Notifier Portal</h1>
+<!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css /> -->
+<div class="container">
+    <div class="row">
+        <div class="header">
+            <div class="app-name">
+                <h3 class="app-name-text">Drug Notifier Portal</h3>
+            </div>
+            <div class="user-details">
+                <h5 class="app-name-text user-name">Welcome, <span id="username"></span> <a href="javascript:logout()" data-tip="logout"
+                                                                                            title="Log out"><i class="fa fa-sign-out"></i></a></h5>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="table-responsive col-md-12">
+            <div class="panel">
+                <div class="panel-heading">
+                    <div class="row">
+                        <div class="col col-sm-6 col-xs-12">
+                            <a></a>
+                            <h4 class="title"><a href="javascript:goBack()" data-tip="go Back"
+                                                 title="Go back"><i class="fa fa-arrow-left"></i></a>&nbsp;&nbsp;Prescription - (<span id="patientName"></span>)</h4>
+                        </div>
+                        <div class="col-sm-6 col-xs-12 text-right">
+                            <div class="btn_group">
+                                <input type="text" class="form-control" placeholder="Search">
+                                <button id="add-button" class="btn btn-default" title="Add" onclick="add()">Add <i class="fa fa-plus"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="add-prescriptions">
+                    <div class="inner-add-div">
+                    <form name="prescriptionForm" onsubmit="addPrescription(event)">
+                    <table>
+                        <tbody>
+                        <tr>
+                            <td colspan="7"><h4 id="add-edit-title"></h4></td>
+                        </tr>
+                        <tr>
+                            <td><input type="text" name="drugName" placeholder="Enter Drug Name" required /></td>
+                            <td><input type="text" name="dosage" placeholder="Enter Dosage" required /></td>
+                            <td><input type="text" name="notes" placeholder="Enter Note if any" /></td>
+                            <td><select name="morning" required>
+                                <option value="" selected disabled>Take in Morning</option>
+                                <option value="Yes">Yes</option>
+                                <option value="No">No</option>
+                            </select></td>
+                            <td><select name="noon" required>
+                                <option value="" selected disabled>Take in Noon</option>
+                                <option value="Yes">Yes</option>
+                                <option value="No">No</option>
+                            </select></td>
+                            <td><select name="night" required>
+                                <option value="" selected disabled>Take in Night</option>
+                                <option value="Yes">Yes</option>
+                                <option value="No">No</option>
+                            </select></td>
+                            <td>
+                                <div class="action-buttons-holder">
+                                    <button type="submit" class="btn btn-success" id="edit-save"></button>
+                                    <button type="button" class="btn btn-secondary" onclick="cancel()">Cancel</button>
+                                </div>
+
+                            </td>
+                        </tr>
+
+                        </tbody>
+                    </table>
+                    </form>
+                    </div>
+                </div>
+                <div class="panel-body table-responsive">
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th>S.No</th>
+                            <th>Drug Name</th>
+                            <th>Dosage</th>
+                            <th>Morning</th>
+                            <th>Noon</th>
+                            <th>Night</th>
+                            <th>Notes</th>
+                            <th>Prescribed By</th>
+                            <th>Prescribed Date</th>
+                            <th id="action">Action</th>
+                        </tr>
+                        </thead>
+                        <tbody id="prescription-list">
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 </body>
+<script>
+    getPrescriptionData();
+</script>
 </html>

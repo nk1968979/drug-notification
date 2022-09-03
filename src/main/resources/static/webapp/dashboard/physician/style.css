@@ -3,6 +3,61 @@
     font-family: 'Noto Sans', sans-serif;
 }
 
+a:link {
+  color: #ffad33;
+}
+
+a:visited {
+  color: #ffcc80;
+}
+
+a:hover {
+  color: #ff9900;
+}
+
+a:active {
+  color: #cc7a00;
+}
+
+#add-prescriptions{
+    padding:5px;
+    width:100%;
+    position:relative;
+}
+.inner-add-div{
+    border: 1px solid white;
+    width:100%;
+    position:relative;
+    padding:15px;
+}
+
+#add-edit-title{
+    color: #fff;
+    font-size: 18px;
+    font-weight: 500;
+    padding-left:5px;
+}
+
+#add-prescriptions input,#add-prescriptions select{
+    width:200px;
+    padding:4px;
+    font-size:12px;
+    outline-color: #ffcc80;
+    margin-left:5px;
+}
+
+.action-buttons-holder{
+    padding-left:10px;
+}
+.action-buttons-holder .btn{
+    line-height:normal!important;
+}
+
+#add-prescriptions select{
+    width:150px!important;
+}
+
+#add-prescriptions select:invalid { color: gray!important; }
 .header{
     height: 63px;
     background: linear-gradient(to right, #008080, #2c3e50);

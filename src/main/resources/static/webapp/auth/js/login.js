@@ -12,7 +12,11 @@ function login(event,role){
                           contentType: "application/json",
                           success: function(resultData) {
                             window.localStorage.setItem("token","Bearer "+resultData.token);
-                            window.location.href="/webapp/dashboard/"+role+"/home.html";
+                            var redirectURL="/webapp/dashboard/"+role+"/home.html";
+                            if(role==="patient"){
+                                redirectURL=redirectURL+"?id="+resultData.id;
+                            }
+                            window.location.href=redirectURL;
                            },
                           error:function(error){
                             alert(error.responseJSON.message);

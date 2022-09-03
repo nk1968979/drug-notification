@@ -19,8 +19,6 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
-import java.sql.SQLException;
-
 @RestController
 @CrossOrigin
 public class JwtAuthenticationController {
@@ -46,7 +44,7 @@ public class JwtAuthenticationController {
 
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     public ResponseEntity<?> createAuthenticationToken(@RequestBody JwtRequest authenticationRequest) throws Exception {
-
+        Long id=null;
         authenticate(authenticationRequest.getUsername(), authenticationRequest.getPassword());
 
         final UserDetails userDetails = userDetailsService
@@ -56,8 +54,11 @@ public class JwtAuthenticationController {
         }
 
         final String token = jwtTokenUtil.generateToken(userDetails);
-
-        return ResponseEntity.ok(new JwtResponse(token));
+        if(authenticationRequest.getRole().equalsIgnoreCase("patient")){
+            id=patientRepository.findByEmail(authenticationRequest.getUsername()).getId();
+            System.out.println("I am here");
+        }
+        return ResponseEntity.ok(new JwtResponse(token, id==null?"":id.toString()));
     }
 
     @PostMapping("/register-physician")

@@ -8,7 +8,7 @@ function fillPatientData(){
                             $('#username').text(resultData.username);
                             var body="";
                             $.each(resultData.patients, function(index,patient) {
-                                var row="<tr><td>"+(index+1)+"</td><td>"+patient.fullName+"</td><td>"+patient.gender+"</td><td>"+patient.age+"</td><td>"+patient.height+"</td><td>"+patient.weight+"</td><td>"+patient.email+"</td><td>"+patient.phoneNum+"</td><td><ul class='action-list'><li><a href='#' data-tip='edit'><i class='fa fa-edit'></i></a></li><li><a href='#' data-tip='delete'><i class='fa fa-trash'></i></a></li></ul></td></tr>"
+                                var row="<tr><td>"+(index+1)+"</td><td>"+patient.fullName+"</td><td>"+patient.gender+"</td><td>"+patient.age+"</td><td>"+patient.height+"</td><td>"+patient.weight+"</td><td>"+patient.email+"</td><td>"+patient.phoneNum+"</td><td><a href='javascript:showPrescriptions("+patient.id+")' data-tip='Prescriptions' title='Prescriptions'> Show Prescriptions <i class='fa fa-plus-square-o'></i></a></td></tr>"
                                 body=body+row;
                             });
                             $('#patient-list').html(body);
@@ -19,4 +19,8 @@ function fillPatientData(){
                           alert(error.responseJSON.message);
                }
      });
+}
+
+function showPrescriptions(id){
+     window.location.href="/webapp/dashboard/patient/home.html?id="+id;
 }
