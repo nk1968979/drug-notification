@@ -36,6 +36,7 @@ public class NotifierController {
 
     @Autowired
     private PhysicianRepository physicianRepository;
+
     @GetMapping("/getRole")
     public ResponseEntity getRole(@AuthenticationPrincipal User user){
         Map response=new HashMap();
