@@ -20,6 +20,7 @@ public class ControllerAdvisor extends ResponseEntityExceptionHandler {
         response.setStatus(HttpStatus.INTERNAL_SERVER_ERROR.value());
         response.setMessage(ex.getMessage());
         response.setTimeStamp(System.currentTimeMillis());
+        ex.printStackTrace();
         return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
     }
     @Override

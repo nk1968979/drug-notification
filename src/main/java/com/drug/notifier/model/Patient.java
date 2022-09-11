@@ -7,6 +7,7 @@ public class Patient {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    private String mrn;
     private String fullName;
     private int age;
     private String gender;
@@ -96,5 +97,18 @@ public class Patient {
 
     public void setRole(String role) {
         this.role = role;
+    }
+
+    public String getMrn() {
+        return mrn;
+    }
+
+    public void setMrn(String mrn) {
+        this.mrn = mrn;
+    }
+
+    @PostPersist
+    public void onSave(){
+        setMrn("MRN-"+String.format("%05d",this.getId()));
     }
 }

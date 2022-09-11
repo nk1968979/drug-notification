@@ -11,7 +11,7 @@ function getPrescriptionData(){
                success: function(resultData) {
                             $('#username').text(resultData.username);
                             $('#patientName').text(resultData.patientName);
-                            var body="";
+                            var body="<tr class='notfound'><td colspan='10'>No record found</td></tr>";
                             $.each(resultData.prescriptions, function(index,prescription) {
                                 var row="<tr><td>"+(index+1)+"</td><td>"+prescription.drugName+"</td><td>"+prescription.dosage+"</td><td>"+prescription.morning+"</td><td>"+prescription.noon+"</td><td>"+prescription.night+"</td><td>"+prescription.notes+"</td><td>"+prescription.prescribedBy+"</td><td>"+new Date(prescription.prescriptionDate).toLocaleString()+"</td>";
                                 if(resultData.role==="physician"){
@@ -21,7 +21,8 @@ function getPrescriptionData(){
                             });
                             if(resultData.role==="patient"){
                                 $("#add-button").hide();
-                                 $("#action").hide();
+                                $("#action").hide();
+                                $("#back-button").hide();
                             }
                             $('#prescription-list').html(body);
 

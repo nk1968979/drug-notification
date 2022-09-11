@@ -24,6 +24,10 @@ a:active {
     width:100%;
     position:relative;
 }
+
+#dataTable .notfound{
+  display: none;
+}
 .inner-add-div{
     border: 1px solid white;
     width:100%;
