@@ -37,6 +37,7 @@ function register(event,role){
 }
 
 function validateData(registerData,role){
+    //regex
     var emailPattern = /^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/;
     if(!isNotEmpty(registerData.fullName)){
         alert("Please Enter Full Name");
@@ -53,7 +54,7 @@ function validateData(registerData,role){
     }else if(!registerData.email.match(emailPattern)){
         alert("Please Enter valid Email");
         return false;
-    }else if(isNaN(registerData.phoneNum) || registerData.phoneNum.length<10 || !['9','8','7','6'].includes(registerData.phoneNum.toString().charAt(0))){
+    }else if(isNaN(registerData.phoneNum) || registerData.phoneNum.length!=10 || !['9','8','7','6'].includes(registerData.phoneNum.toString().charAt(0))){
         alert("Please Enter valid Phone Number");
         return false;
     }else if(registerData.pass!==document.registerForm.passConf.value){
