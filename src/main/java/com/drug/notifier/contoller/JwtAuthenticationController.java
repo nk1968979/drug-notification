@@ -8,6 +8,7 @@ import com.drug.notifier.model.Physician;
 import com.drug.notifier.repositories.PatientRepository;
 import com.drug.notifier.repositories.PhysicianRepository;
 import com.drug.notifier.services.impl.JwtUserDetailsService;
+import org.hibernate.exception.ConstraintViolationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -56,7 +57,6 @@ public class JwtAuthenticationController {
         final String token = jwtTokenUtil.generateToken(userDetails);
         if(authenticationRequest.getRole().equalsIgnoreCase("patient")){
             id=patientRepository.findByEmail(authenticationRequest.getUsername()).getId();
-            System.out.println("I am here");
         }
         return ResponseEntity.ok(new JwtResponse(token, id==null?"":id.toString()));
     }
@@ -64,24 +64,34 @@ public class JwtAuthenticationController {
     @PostMapping("/register-physician")
     public ResponseEntity registerUser(@RequestBody Physician userEntity) throws Exception {
         //Encoding Before saving to DB
+        Physician physician=usersRepository.findByEmail(userEntity.getEmail());
+        if(physician!=null){
+            throw new Exception("Physician with email: "+userEntity.getEmail()+ " Already Exists");
+        }
         try {
             userEntity.setPass(passwordEncoder.encode(userEntity.getPass()));
             usersRepository.save(userEntity);
             return ResponseEntity.ok("Physician Registered Successfully");
         } catch (Exception exception) {
-            throw new Exception("User Creation Failed" + exception.getMessage());
+            throw new Exception("User Creation Failed");
         }
     }
 
     @PostMapping("/register-patient")
     public ResponseEntity registerPatient(@RequestBody Patient userEntity) throws Exception {
+
+        Patient patient=patientRepository.findByEmail(userEntity.getEmail());
+        if(patient!=null){
+            throw new Exception("Patient with email: "+userEntity.getEmail()+ " Already Exists");
+        }
         //Encoding Before saving to DB
         try {
+
             userEntity.setPass(passwordEncoder.encode(userEntity.getPass()));
             patientRepository.save(userEntity);
             return ResponseEntity.ok("Patient Registered Successfully");
         } catch (Exception exception) {
-            throw new Exception("User Creation Failed" + exception.getMessage());
+            throw new Exception("User Creation Failed");
         }
 
     }
